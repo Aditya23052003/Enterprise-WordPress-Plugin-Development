@@ -35,3 +35,11 @@ class MyEnterprisePlugin {
 }
 
 new MyEnterprisePlugin();
+
+public function enqueue_scripts() {
+    wp_enqueue_script('my-enterprise-custom-js', plugin_dir_url(__FILE__) . 'assets/js/custom.js', array('jquery'), '1.0', true);
+    wp_localize_script('my-enterprise-custom-js', 'my_custom_object', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('my_custom_nonce')
+    ));
+}
